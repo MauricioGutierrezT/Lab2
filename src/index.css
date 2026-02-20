@@ -78,3 +78,30 @@ button:focus-visible {
     box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
   }
 }
+.api-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.api-card {
+  width: 400px;
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #1f1f2e, #2c2c3f);
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 150, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.api-card:hover {
+  transform: scale(1.02);
+}
+
+.buttons button {
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
