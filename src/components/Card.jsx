@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const Card = ({ id, name, sprites = [] }) => {
 
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(false);
+    const timeout = setTimeout(() => {
+      setVisible(true);
+    }, 50);
+
+    return () => clearTimeout(timeout);
+  }, [id]);
+
   return (
     <div style={styles.wrapper}>
-      <div style={styles.card}>
+      <div
+        style={{
+          ...styles.card,
+          opacity: visible ? 1 : 0,
+          transform: visible ? "scale(1)" : "scale(0.95)",
+        }}
+      >
+
+        <div style={styles.glow}></div>
 
         <div style={styles.idBadge}>
           #{id}
@@ -39,57 +58,80 @@ export const Card = ({ id, name, sprites = [] }) => {
 };
 
 const styles = {
+
   wrapper: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "40px",
+    marginTop: "50px",
   },
 
   card: {
-    width: "320px",
-    padding: "30px",
-    borderRadius: "20px",
-    background: "linear-gradient(145deg, #1e1e2f, #2a2a40)",
-    boxShadow: "0 15px 35px rgba(0,0,0,0.4)",
+    width: "340px",
+    padding: "35px",
+    borderRadius: "24px",
+    background: "linear-gradient(145deg, #1e1e2f, #2c2c45)",
+    boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
     textAlign: "center",
     color: "white",
     position: "relative",
-    transition: "transform 0.3s ease",
+    overflow: "visible",
+    transition: "all 0.4s ease",
   },
+
+  glow: {
+  position: "absolute",
+  top: "0",
+  left: "0",
+  right: "0",
+  bottom: "0",
+  borderRadius: "24px",
+  boxShadow: "0 0 60px rgba(0, 255, 255, 0.6)",
+  animation: "pulse 2.5s ease-in-out infinite",
+  zIndex: -1,
+},
+
 
   idBadge: {
     position: "absolute",
-    top: "15px",
+    top: "18px",
     right: "20px",
     fontSize: "14px",
     background: "#ff4757",
-    padding: "5px 12px",
+    padding: "6px 14px",
     borderRadius: "20px",
     fontWeight: "bold",
+    zIndex: 2,
   },
 
   image: {
-    width: "180px",
-    height: "180px",
+    width: "200px",
+    height: "200px",
     objectFit: "contain",
-    marginBottom: "15px",
+    marginBottom: "20px",
+    zIndex: 2,
+    position: "relative",
   },
 
   name: {
     textTransform: "capitalize",
-    fontSize: "24px",
-    marginBottom: "15px",
+    fontSize: "26px",
+    marginBottom: "18px",
     letterSpacing: "1px",
+    zIndex: 2,
+    position: "relative",
   },
 
   spriteRow: {
     display: "flex",
     justifyContent: "center",
-    gap: "10px",
+    gap: "12px",
+    zIndex: 2,
+    position: "relative",
   },
 
   smallSprite: {
-    width: "50px",
-    opacity: 0.8,
+    width: "55px",
+    opacity: 0.85,
+    transition: "transform 0.3s ease",
   },
 };
